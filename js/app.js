@@ -31,17 +31,17 @@ app.activePage = (pageName) => {
 
     document.querySelector(`[href='#${pageName}']`).classList.add('active');
 
-    
+
 }
 
 app.loadPage = async (pageName) => {
-    if(app.cachePages.has(pageName)){
+    if (app.cachePages.has(pageName)) {
         app.contentElement.innerHTML = app.cachePages.get(pageName);
         return;
     }
     const response = await axios.get(`./pages/${pageName}.html`)
-    .catch(() => null);
-    if(response === null){
+        .catch(() => null);
+    if (response === null) {
         location.href = '#404';
     }
     else if (response.status === 200) {
@@ -49,6 +49,7 @@ app.loadPage = async (pageName) => {
         app.contentElement.innerHTML = content;
     }
 }
+
 //Lancement de l'application
 (() => {
     app.init();
